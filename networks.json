@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "DegaISPO": {
+      "address": "0x49325cAfbB06b500Ac85B5FCc386E9C579dC25B2",
+      "startBlock": 10422648
+    }
+  }
+}

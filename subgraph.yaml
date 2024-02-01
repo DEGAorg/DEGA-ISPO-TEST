@@ -1,0 +1,53 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: DegaISPO
+    network: goerli
+    source:
+      address: "0x49325cAfbB06b500Ac85B5FCc386E9C579dC25B2"
+      abi: DegaISPO
+      startBlock: 10422648
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AssignRewards
+        - Deposit
+        - EmergencyWithdraw
+        - MaxTotalDepositUpdated
+        - Paused
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+        - Unpaused
+        - Withdraw
+      abis:
+        - name: DegaISPO
+          file: ./abis/DegaISPO.json
+      eventHandlers:
+        - event: AssignRewards(uint256,uint256,uint256)
+          handler: handleAssignRewards
+        - event: Deposit(indexed address,uint256,uint256)
+          handler: handleDeposit
+        - event: EmergencyWithdraw(indexed address,uint256,uint256)
+          handler: handleEmergencyWithdraw
+        - event: MaxTotalDepositUpdated(uint256)
+          handler: handleMaxTotalDepositUpdated
+        - event: Paused(address)
+          handler: handlePaused
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: Unpaused(address)
+          handler: handleUnpaused
+        - event: Withdraw(indexed address,uint256,uint256)
+          handler: handleWithdraw
+      file: ./src/dega-ispo.ts
